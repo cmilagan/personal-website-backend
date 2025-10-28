@@ -1,9 +1,8 @@
-# personal-website-backend
+# Personal Website Backend
 
-For more details see:
-https://cloudresumechallenge.dev/docs/the-challenge/aws/
+Terraform infrastructure as code (IaC) repository for my personal website, implementing the [AWS Cloud Resume Challenge](https://cloudresumechallenge.dev/docs/the-challenge/aws/).
 
-IaC repo defining infra related to my personal website for both the backend & frontend
+This project defines the complete infrastructure for both backend and frontend components of the website.
 
 ## Service Configurations
 
@@ -31,4 +30,55 @@ IaC repo defining infra related to my personal website for both the backend & fr
 
 - Stores visitor count
 
-![alt text](image.png)
+## Architecture
+
+![Architecture Diagram](docs/architecture.png)
+
+## Project Structure
+
+```
+.
+├── main.tf                 # Root module - orchestrates all infrastructure
+├── variables.tf            # Root-level variable definitions
+├── outputs.tf              # Root-level outputs
+├── terraform.tf            # Terraform and provider configuration
+├── modules/                # Reusable Terraform modules
+│   ├── acm/               # SSL/TLS certificate management
+│   ├── apigateway/        # API Gateway configuration
+│   ├── cloudfront/        # CloudFront CDN
+│   ├── dynamodb/          # DynamoDB tables
+│   ├── lambda/            # Lambda functions
+│   └── s3/                # S3 bucket for static hosting
+├── environments/          # Environment-specific configurations
+├── lambda_code/           # Python code for Lambda functions
+├── scripts/               # Utility scripts
+└── docs/                  # Documentation and diagrams
+```
+
+## Prerequisites
+
+- [Terraform](https://www.terraform.io/downloads.html) >= 1.2
+- AWS CLI configured with appropriate credentials
+- AWS account with necessary permissions
+
+## Usage
+
+1. Initialize Terraform:
+   ```bash
+   terraform init
+   ```
+
+2. Review the planned changes:
+   ```bash
+   terraform plan
+   ```
+
+3. Apply the infrastructure:
+   ```bash
+   terraform apply
+   ```
+
+4. Destroy the infrastructure (when needed):
+   ```bash
+   terraform destroy
+   ```
